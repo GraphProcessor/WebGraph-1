@@ -10,7 +10,21 @@ example, are given by the script. Otherwise, one should either run the script
 in a bash with `. ./mvn.sh` and run mvn afterwards, or with `./mvn.sh install`
 (i.e., in place of `mvn`).
 
-## Do as follows for build
+## Guidance
+
+you can directly use the jars already built or build by yourself.
+
+for further usage, see instructions and guidance in the Usage part.
+
+## Directly use: javac 1.8 built jars along with authors previous dependencies jars
+
+unzip and get the jars fodler
+
+```zsh
+unzip webgraph-lib-yche-release.zip
+```
+
+## For your own build: Do as follows
 
 >  This version contains the copy list and copy flags compression
   formats, as well as additional flags for the other compression schemes.
