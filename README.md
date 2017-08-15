@@ -1,25 +1,6 @@
 # How to set up and use the WebGraph framework
 
-## Do as follows for build
-
-if you do not have `mvn`, optional: Download and extract Apache Maven binaries from  http://maven.apache.org/download.cgi
-
-- Download the dependencies tarball from http://webgraph.di.unimi.it and
-  extract it.
-
-- Retrieve the WebGraph framework source code with extensions from this
-  repository.
-
->  This version contains the copy list and copy flags compression
-  formats, as well as additional flags for the other compression schemes.
-
-- Compile the JAR file of the framework using Maven by running "mvn install"
-  within the WebGraph root directory.
-
-- Copy the target/webgraph-3.4.2.jar file it to the same location as the JAR
-  files from the dependencies.
-
-## Mvn Issue
+## Possible Mvn Issue
 
 In order to use Maven on a computer where it is not yet in the PATH, one
 can run mvn.sh provided in the repository. This sets up a link to the Maven
@@ -29,13 +10,41 @@ example, are given by the script. Otherwise, one should either run the script
 in a bash with `. ./mvn.sh` and run mvn afterwards, or with `./mvn.sh install`
 (i.e., in place of `mvn`).
 
+## Do as follows for build
+
+>  This version contains the copy list and copy flags compression
+  formats, as well as additional flags for the other compression schemes.
+if you do not have `mvn`, please correctly install it
+
+- Download the dependencies tarball from http://webgraph.di.unimi.it
+
+```zsh
+wget http://webgraph.di.unimi.it/webgraph-deps.tar.gz
+mkdir -p my_lib
+mv webgraph-deps.tar.gz my_lib
+cd my_lib
+tar xvf webgraph-deps.tar.gz
+```
+
+- 1st: Retrieve the WebGraph framework source code with extensions from this
+  repository, 2nd: Compile the JAR file of the framework using Maven by running `mvn install`
+    within the WebGraph root directory, 3rd: Copy the `target/webgraph-3.4.2.jar` file it to the same location as the JAR
+      files from the dependencies.
+
+```zsh
+git clone git@github.com:GraphProcessor/WebGraph-1.git
+cd WebGraph-1
+mvn install
+cd ..
+cp WebGraph-1/target/webgraph-3.4.2.jar .
+```
+
 ## Usage
 
 The framework has different modes of operations that allow compressing,
 decompressing and testing graph files in different formats.
 
-For example, the
-following command recompresses a dataset with other parameters:
+For example, the following command recompresses a dataset with other parameters:
 
 ```zsh
 java -cp "*" it.unimi.dsi.webgraph.BVGraph -o -m 1 ../sets/uk-2002 ../sets/uk-fast
@@ -64,12 +73,12 @@ As we can see, we can set certain parameters to 0 to make sure that their
 respective compression schemes are not used. We can therefore test the algorithms separately. To be specific, we have the following parameters for the
 given compression formats:
 
-- No compression algorithm: -m 0 -w 0 -i 0 -r 0
-- Gaps compression: -m 0 -w 0 -i 0
-- Interval compression: -m 0 -w 0 -r 0
-- Copy blocks: -i 0 -r 0 -b 1
-- Copy list: -i 0 -r 0 -b 0
-- Copy flags: -i 0 -r 0 -b 2
+- No compression algorithm: `-m 0 -w 0 -i 0 -r 0`
+- Gaps compression: `-m 0 -w 0 -i 0`
+- Interval compression: `-m 0 -w 0 -r 0`
+- Copy blocks: `-i 0 -r 0 -b 1`
+- Copy list: `-i 0 -r 0 -b 0`
+- Copy flags: `-i 0 -r 0 -b 2`
 
 For instance, this command creates a graph file with only gaps compression:
 
